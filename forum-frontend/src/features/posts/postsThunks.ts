@@ -1,8 +1,15 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import axiosApi from "../../axiosApi";
-import {GlobalError, PostMutation} from "../../types";
+import {GlobalError, Post, PostMutation} from "../../types";
 import {isAxiosError} from "axios";
 import {RootState} from "../../app/store";
+
+export const fetchPosts = createAsyncThunk(
+    'posts/fetchAll',
+    async () => {
+        const { data: posts } = await axiosApi.get<Post[]>(`/posts`,);
+        return posts;
+});
 
 export const createPost = createAsyncThunk<void, PostMutation, { rejectValue: GlobalError; state: RootState }>(
     'posts/create',

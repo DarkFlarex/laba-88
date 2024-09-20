@@ -46,3 +46,18 @@ export interface PostMutation {
     description: string | null;
     image: string | null;
 }
+
+export interface Comment {
+    _id: string;
+    userPosted: {
+        username:string;
+    };
+    postId: string;
+    comment: string;
+    datetime: string;
+}
+
+export interface CommentMutation {
+    comment: string;
+    postId:string| null;
+}
